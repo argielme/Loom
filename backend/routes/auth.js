@@ -18,8 +18,7 @@ router.post("/sign-in", async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        success: false,
-        message: "Invalid email or password",
+        message: "User does not exist",
       });
     }
 
@@ -27,7 +26,6 @@ router.post("/sign-in", async (req, res) => {
 
     if (!isPasswordValid) {
       return res.status(400).json({
-        success: false,
         message: "Invalid password",
       });
     }
@@ -44,7 +42,7 @@ router.post("/sign-in", async (req, res) => {
     );
 
     return res.status(200).json({
-      success: true,
+      message: "Signed in successfully",
       token,
       user: {
         username: user.username,
@@ -97,6 +95,9 @@ router.post("/sign-up", async (req, res) => {
     return res.status(201).json({
       message: "User created successfully",
       token,
+      user: {
+        username: newUser.username,
+      },
     });
 
   } catch (error) {
