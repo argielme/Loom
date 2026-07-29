@@ -13,7 +13,7 @@ function SignIn() {
   
       if (token) {
         const decode = jwtDecode(token);
-        navigate(`/${decode.username}/chat`);
+        navigate("/chat");
       }
     }, [loading, navigate]);
 
