@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import  Sidebar  from "../components/Sidebar";
+
 function Chat() {
+  const [Username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +30,7 @@ function Chat() {
         }
 
         const data = await response.json();
+        setUsername(data.user.username);
         console.log(data);
       } catch (error) {
         // Express isn't running or another network error occurred
@@ -39,7 +43,9 @@ function Chat() {
 
   return (
     <>
-      <h1>Chat Page</h1>
+      <div className="h-screen flex">
+        <Sidebar username={Username} />
+      </div>
     </>
   );
 }
